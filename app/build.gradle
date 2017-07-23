@@ -9,12 +9,21 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -31,12 +40,24 @@ dependencies {
     compile rootProject.ext.dependencies.design
     compile rootProject.ext.dependencies.vector
     compile rootProject.ext.dependencies.constraint
+
+    annotationProcessor rootProject.ext.dependencies.lifecycleCompiler
     compile rootProject.ext.dependencies.lifecycle
-    annotationProcessor  rootProject.ext.dependencies.lifecycleCompiler
     compile rootProject.ext.dependencies.lifecycleExtensions
+
+    annotationProcessor rootProject.ext.dependencies.roomCompiler
+    compile rootProject.ext.dependencies.room
+    compile rootProject.ext.dependencies.roomRxJava
+
+    compile rootProject.ext.dependencies.retrofit
+
+    compile rootProject.ext.dependencies.butterKnife
+    annotationProcessor rootProject.ext.dependencies.butterKnifeCompiler
+
 
     annotationProcessor rootProject.ext.dependencies.daggerCompiler
     compile rootProject.ext.dependencies.dagger
 
-    testCompile 'junit:junit:4.12'
+    testCompile rootProject.ext.testDependencies.junit
+    testCompile rootProject.ext.testDependencies.roomTest
 }

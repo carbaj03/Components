@@ -4,6 +4,7 @@ allprojects {
         constraintLibraryVersion = "1.0.2"
         arch_version = "1.0.0-alpha5"
         dagger = "2.9"
+        butterKnife = "8.6.0"
 
         dependencies = [
                 annotations        : "com.android.support:support-annotations:$supportLibraryVersion",
@@ -17,6 +18,13 @@ allprojects {
                 lifecycle          : "android.arch.lifecycle:runtime:$arch_version",
                 lifecycleExtensions: "android.arch.lifecycle:extensions:$arch_version",
                 lifecycleCompiler  : "android.arch.lifecycle:compiler:$arch_version",
+                room               : "android.arch.persistence.room:runtime:$arch_version",
+                roomCompiler       : "android.arch.persistence.room:compiler:$arch_version",
+                roomRxJava         : "android.arch.persistence.room:rxjava2:$arch_version",
+                retrofit           : "com.squareup.retrofit2:retrofit:2.3.0",
+
+                butterKnife        : "com.jakewharton:butterknife:$butterKnife",
+                butterKnifeCompiler: "com.jakewharton:butterknife-compiler:$butterKnife",
 
                 daggerCompiler     : "com.google.dagger:dagger-compiler:$dagger",
                 dagger             : "com.google.dagger:dagger:$dagger",
@@ -25,6 +33,7 @@ allprojects {
         ]
         testDependencies = [
                 junit        : "junit:junit:4.12",
+                roomTest     : "android.arch.persistence.room:testing:$arch_version",
                 hamcrest     : "org.hamcrest:hamcrest-library:1.3",
                 mockito      : "org.mockito:mockito-core:1.10.19",
                 mockitoKotlin: "com.nhaarman:mockito-kotlin:1.4.0"
