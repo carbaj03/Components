@@ -21,7 +21,9 @@ allprojects {
                 room               : "android.arch.persistence.room:runtime:$arch_version",
                 roomCompiler       : "android.arch.persistence.room:compiler:$arch_version",
                 roomRxJava         : "android.arch.persistence.room:rxjava2:$arch_version",
+
                 retrofit           : "com.squareup.retrofit2:retrofit:2.3.0",
+                retrofitJson       : "com.squareup.retrofit2:converter-gson:2.1.0",
 
                 butterKnife        : "com.jakewharton:butterknife:$butterKnife",
                 butterKnifeCompiler: "com.jakewharton:butterknife-compiler:$butterKnife",

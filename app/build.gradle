@@ -50,6 +50,7 @@ dependencies {
     compile rootProject.ext.dependencies.roomRxJava
 
     compile rootProject.ext.dependencies.retrofit
+    compile rootProject.ext.dependencies.retrofitJson
 
     compile rootProject.ext.dependencies.butterKnife
     annotationProcessor rootProject.ext.dependencies.butterKnifeCompiler
@@ -60,4 +61,6 @@ dependencies {
 
     testCompile rootProject.ext.testDependencies.junit
     testCompile rootProject.ext.testDependencies.roomTest
+
+    compile 'com.google.code.gson:gson:2.8.0'
 }
