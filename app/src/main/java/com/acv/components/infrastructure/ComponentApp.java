@@ -1,28 +1,30 @@
 package com.acv.components.infrastructure;
 
 
+import android.app.Activity;
 import android.app.Application;
 
-import com.acv.components.infrastructure.di.component.AppComponent;
-import com.acv.components.infrastructure.di.component.DaggerAppComponent;
-import com.acv.components.infrastructure.di.module.AppModule;
+import com.acv.components.infrastructure.di.AppInjector;
 
-public class ComponentApp extends Application{
+import javax.inject.Inject;
 
-    public static AppComponent appComponent;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class ComponentApp extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        appComponent = initializeDagger();
+        AppInjector.init(this);
     }
 
-    private AppComponent initializeDagger() {
-        return DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingActivityInjector;
     }
-
-    public void setAppComponent(AppComponent appComponent) {
-        ComponentApp.appComponent = appComponent;
-    }
-
 }

@@ -1,6 +1,11 @@
-package com.acv.components.infrastructure.domain.model;
+package com.acv.components.infrastructure.persistence.retrofit;
 
 
+import com.acv.components.infrastructure.persistence.retrofit.model.IdDataModel;
+import com.acv.components.infrastructure.persistence.retrofit.model.LocationDataModel;
+import com.acv.components.infrastructure.persistence.retrofit.model.LoginDataModel;
+import com.acv.components.infrastructure.persistence.retrofit.model.NameDataModel;
+import com.acv.components.infrastructure.persistence.retrofit.model.PictureDataModel;
 import com.google.gson.annotations.SerializedName;
 
 public class UserResult {

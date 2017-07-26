@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.acv.components.R;
+import com.acv.components.infrastructure.ComponentApp;
+import com.acv.components.infrastructure.di.module.MainModule;
 
 import butterknife.BindView;
 
@@ -18,7 +20,7 @@ public class MainFragment extends LifecycleFragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
     private static final String UID_KEY = "uid";
-    private UserProfileViewModel viewModel;
+    private UserViewModel viewModel;
 
     @BindView(R.id.tvMain)
     TextView tvMain;
@@ -32,13 +34,19 @@ public class MainFragment extends LifecycleFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ComponentApp.appComponent.plus(new MainModule(this)).inject(this);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         String userId = getArguments().getString(UID_KEY);
 
-        viewModel = ViewModelProviders.of(this).get(UserProfileViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         viewModel.init(userId);
-        viewModel.getUser().observe(this, user -> tvMain.setText(user.getEmail()));
+        viewModel.getUser().observe(this, user -> tvMain.setText(user.get(0).getEmail()));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.acv.components.infrastructure.domain.model;
+package com.acv.components.infrastructure.persistence.retrofit.model;
 
 import com.google.gson.annotations.SerializedName;
 

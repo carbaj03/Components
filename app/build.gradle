@@ -10,6 +10,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        buildConfigField "String", "API_URL", '"http://api.randomuser.me/"'
+        buildConfigField "int", "CONCURRENT_INTERACTORS", "3"
+
         jackOptions {
             enabled true
         }
@@ -51,16 +54,28 @@ dependencies {
 
     compile rootProject.ext.dependencies.retrofit
     compile rootProject.ext.dependencies.retrofitJson
+    compile rootProject.ext.dependencies.okHttp
+    compile rootProject.ext.dependencies.logginInterceptor
 
     compile rootProject.ext.dependencies.butterKnife
     annotationProcessor rootProject.ext.dependencies.butterKnifeCompiler
 
 
     annotationProcessor rootProject.ext.dependencies.daggerCompiler
+    annotationProcessor rootProject.ext.dependencies.daggerAndroidCompiler
+    compile rootProject.ext.dependencies.daggerAndroid
+    compile rootProject.ext.dependencies.daggerAndroidSupport
     compile rootProject.ext.dependencies.dagger
 
     testCompile rootProject.ext.testDependencies.junit
     testCompile rootProject.ext.testDependencies.roomTest
 
     compile 'com.google.code.gson:gson:2.8.0'
+}
+
+
+android {
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
 }
