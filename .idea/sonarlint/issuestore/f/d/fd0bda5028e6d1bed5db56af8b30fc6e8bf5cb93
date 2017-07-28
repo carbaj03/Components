@@ -1,5 +1,0 @@
-
-v%squid:RedundantThrowsDeclarationCheck"GRemove the redundant '!unknownSymbol!' thrown exception declaration(s).(ìÆ®à
-Isquid:S1068"-Remove this unused "apiClient" private field.(šÃôœ8 äøÌ×+
-Xsquid:UselessImportCheck"/Remove this unused import 'retrofit2.Response'.(¾éçï8 äøÌ×+
-Tsquid:UselessImportCheck"+Remove this unused import 'retrofit2.Call'.(Çö÷›8 äøÌ×+

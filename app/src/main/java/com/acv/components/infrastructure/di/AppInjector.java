@@ -24,10 +24,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.acv.components.infrastructure.ComponentApp;
-import com.acv.components.infrastructure.di.component.DaggerAppComponent;
-import com.android.example.github.GithubApp;
+import com.acv.components.infrastructure.di.module.DaggerAppComponent;
 
-import dagger.Component;
 import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -36,45 +34,47 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Helper class to automatically inject fragments if they implement {@link Injectable}.
  */
 public class AppInjector {
-    private AppInjector() {}
+    private AppInjector() {
+    }
+
     public static void init(ComponentApp app) {
         DaggerAppComponent.builder().application(app).build().inject(app);
         app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-                    @Override
-                    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                        handleActivity(activity);
-                    }
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                handleActivity(activity);
+            }
 
-                    @Override
-                    public void onActivityStarted(Activity activity) {
+            @Override
+            public void onActivityStarted(Activity activity) {
 
-                    }
+            }
 
-                    @Override
-                    public void onActivityResumed(Activity activity) {
+            @Override
+            public void onActivityResumed(Activity activity) {
 
-                    }
+            }
 
-                    @Override
-                    public void onActivityPaused(Activity activity) {
+            @Override
+            public void onActivityPaused(Activity activity) {
 
-                    }
+            }
 
-                    @Override
-                    public void onActivityStopped(Activity activity) {
+            @Override
+            public void onActivityStopped(Activity activity) {
 
-                    }
+            }
 
-                    @Override
-                    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
 
-                    }
+            }
 
-                    @Override
-                    public void onActivityDestroyed(Activity activity) {
+            @Override
+            public void onActivityDestroyed(Activity activity) {
 
-                    }
-                });
+            }
+        });
     }
 
     private static void handleActivity(Activity activity) {
@@ -87,7 +87,7 @@ public class AppInjector {
                             new FragmentManager.FragmentLifecycleCallbacks() {
                                 @Override
                                 public void onFragmentCreated(FragmentManager fm, Fragment f,
-                                        Bundle savedInstanceState) {
+                                                              Bundle savedInstanceState) {
                                     if (f instanceof Injectable) {
                                         AndroidSupportInjection.inject(f);
                                     }

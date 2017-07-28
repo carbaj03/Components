@@ -34,8 +34,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
-public class DataModule {
+@Module(includes = ViewModelModule.class)
+class DataModule {
     @Provides
     @Singleton
     public ComponentRetrofit provideRandomUserGateway(

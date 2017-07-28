@@ -1,6 +1,5 @@
 package com.acv.components.infrastructure.persistence.retrofit;
 
-import com.acv.components.infrastructure.persistence.retrofit.UserResult;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

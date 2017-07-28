@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ComponentRetrofit implements ComponentNetworkGateway {
@@ -30,11 +32,22 @@ public class ComponentRetrofit implements ComponentNetworkGateway {
     @Override
     public LiveData<List<User>> obtainUser(String id) throws NetworkException, NetworkGatewayException {
         final MutableLiveData<List<User>> data = new MutableLiveData<>();
-        try {
-            data.setValue(getUsers(apiClient.getAllRandomUsers().execute()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        apiClient.getAllRandomUsers().enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+             data.setValue(getUsers(response));
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+
+            }
+        });
+//        try {
+//            data.setValue(getUsers(apiClient.getAllRandomUsers().execute()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         return data;
     }
 
