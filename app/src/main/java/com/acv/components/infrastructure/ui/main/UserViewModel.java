@@ -1,24 +1,27 @@
 package com.acv.components.infrastructure.ui.main;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.acv.components.domain.NetworkGatewayException;
-import com.acv.components.domain.model.User;
 import com.acv.components.infrastructure.persistence.retrofit.ComponentRetrofit;
+import com.acv.components.infrastructure.ui.main.model.UserItemModel;
+import com.acv.components.infrastructure.ui.mapper.UserViewMapper;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class UserViewModel extends ViewModel {
-    private LiveData<List<User>> user;
+    private MutableLiveData<List<UserItemModel>> user;
     private ComponentRetrofit repo;
+    private UserViewMapper mapper;
 
     @Inject
-    public UserViewModel(ComponentRetrofit repo) {
+    public UserViewModel(ComponentRetrofit repo, UserViewMapper mapper) {
         this.repo = repo;
+        this.mapper = mapper;
     }
 
     public void init(String userId) {
@@ -27,14 +30,15 @@ public class UserViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
+        user = new MutableLiveData<>();
         try {
-            user = repo.obtainUser(userId);
+            user.setValue(mapper.map(repo.obtainUser(userId).getValue()));
         } catch (NetworkGatewayException e) {
             e.printStackTrace();
         }
     }
 
-    public LiveData<List<User>> getUser() {
+    public LiveData<List<UserItemModel>> getUser() {
         return user;
     }
 }

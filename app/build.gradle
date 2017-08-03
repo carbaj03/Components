@@ -67,6 +67,7 @@ dependencies {
     testCompile rootProject.ext.testDependencies.junit
     testCompile rootProject.ext.testDependencies.roomTest
 
+    compile rootProject.ext.dependencies.glide
     compile 'com.google.code.gson:gson:2.8.0'
 }
 

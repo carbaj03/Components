@@ -11,7 +11,6 @@ import com.acv.components.domain.gateway.ComponentNetworkGateway;
 import com.acv.components.domain.model.User;
 import com.acv.components.infrastructure.domain.mapper.Mapper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ComponentRetrofit implements ComponentNetworkGateway {
         apiClient.getAllRandomUsers().enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-             data.setValue(getUsers(response));
+                data.setValue(getUsers(response));
             }
 
             @Override

@@ -23,6 +23,8 @@ import com.acv.components.infrastructure.persistence.retrofit.model.LocationData
 import com.acv.components.infrastructure.persistence.retrofit.model.LoginDataModel;
 import com.acv.components.infrastructure.persistence.retrofit.model.NameDataModel;
 import com.acv.components.infrastructure.persistence.retrofit.model.PictureDataModel;
+import com.acv.components.infrastructure.ui.main.model.UserItemModel;
+import com.acv.components.infrastructure.ui.mapper.UserViewMapper;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -130,4 +132,6 @@ class DataModule {
     Mapper<LoginDataModel, Login> provideLoginMapper() {
         return new LoginMapper();
     }
+
+
 }

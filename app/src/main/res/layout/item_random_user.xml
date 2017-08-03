@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minHeight="88dp"
+    android:background="@drawable/ripple_custom"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivPicture"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:transitionName="@string/transition_name_circle"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:scaleType="centerInside"
+        tools:src="@mipmap/ic_launcher"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="@string/transition_name_name"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/ivPicture"
+        android:layout_toRightOf="@+id/ivPicture"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        tools:text="Full Name" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignRight="@+id/tvName"
+        android:layout_below="@+id/tvName"
+        android:layout_toEndOf="@+id/ivPicture"
+        android:layout_toRightOf="@+id/ivPicture"
+        tools:text="email@prueba.com" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignRight="@+id/tvName"
+        android:layout_below="@+id/tvEmail"
+        android:layout_toEndOf="@+id/ivPicture"
+        android:layout_toRightOf="@+id/ivPicture"
+        tools:text="987 65 56 42" />
+
+</RelativeLayout>

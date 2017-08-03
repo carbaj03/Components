@@ -6,13 +6,17 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.acv.components.R;
 import com.acv.components.infrastructure.di.Injectable;
+import com.acv.components.infrastructure.ui.Navigator;
+import com.acv.components.infrastructure.ui.common.DividerStickyDecoration;
 
 import javax.inject.Inject;
 
@@ -25,10 +29,14 @@ public class MainFragment extends LifecycleFragment implements Injectable {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    @BindView(R.id.tvMain)
-    TextView tvMain;
+    @Inject
+    protected Navigator navigator;
+
+    @BindView(R.id.rvUsers)
+    RecyclerView rvUsers;
 
     private UserViewModel viewModel;
+    private UserAdapter adapter;
 
     public static MainFragment create(String id) {
         Bundle args = new Bundle();
@@ -43,9 +51,21 @@ public class MainFragment extends LifecycleFragment implements Injectable {
         super.onActivityCreated(savedInstanceState);
         String userId = getArguments().getString(UID_KEY);
 
+        final DividerStickyDecoration divider = new DividerStickyDecoration(
+                ContextCompat.getColor(getContext(), R.color.colorPrimary), 1);
+        adapter = new UserAdapter();
+        adapter.setListener((view, position) -> {
+            navigator.navigateToDetail(getActivity(), view, adapter.getItem(position).getId());
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvUsers.addItemDecoration(divider);
+        rvUsers.setAdapter(adapter);
+        rvUsers.setLayoutManager(linearLayoutManager);
+        rvUsers.setHasFixedSize(true);
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel.class);
         viewModel.init(userId);
-        viewModel.getUser().observe(this, user -> tvMain.setText(user.get(0).getEmail()));
+        viewModel.getUser().observe(this, user -> adapter.set(user));
     }
 
     @Override
